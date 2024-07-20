@@ -22,7 +22,7 @@ resource "aws_cloudfront_distribution" "distribution" {
   comment             = "CloudFront distribution for ${var.domain_name}"
   default_root_object = "index.html"
 
-  aliases = ["${var.domain_name}.org", "www.${var.domain_name}.org"]
+  aliases = ["${var.domain_name}", "www.${var.domain_name}"]
 
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
