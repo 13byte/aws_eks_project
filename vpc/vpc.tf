@@ -55,8 +55,10 @@ resource "aws_subnet" "public" {
   enable_resource_name_dns_a_record_on_launch = true
 
   tags = {
-    Name    = "public-${var.vpc_name}-${element(var.short_azs, count.index)}"
-    Network = "public"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "kubernetes.io/role/elb"                    = 1
+    Name                                        = "public-${var.vpc_name}-${element(var.short_azs, count.index)}"
+    Network                                     = "public"
   }
 }
 
@@ -90,8 +92,10 @@ resource "aws_subnet" "private_was" {
   enable_resource_name_dns_a_record_on_launch = true
 
   tags = {
-    Name    = "private-was-${var.vpc_name}-${element(var.short_azs, count.index)}"
-    Network = "private"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "kubernetes.io/role/internal-elb"           = 1
+    Name                                        = "private-was-${var.vpc_name}-${element(var.short_azs, count.index)}"
+    Network                                     = "private"
   }
 }
 

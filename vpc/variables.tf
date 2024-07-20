@@ -20,3 +20,7 @@ variable "cidr_numeral_private_was" {
 
 variable "cidr_numeral_private_db" {
 }
+
+variable "cluster_name" {
+
+}
