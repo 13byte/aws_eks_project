@@ -47,3 +47,12 @@ resource "aws_route53_record" "cloudfront_alias2" {
     evaluate_target_health = false
   }
 }
+
+resource "aws_route53_record" "rds" {
+  name    = "db.${var.domain_name}.internal"
+  type    = "CNAME"
+  zone_id = aws_route53_zone.internal.zone_id
+  ttl     = 60
+
+  records = [var.rds_address]
+}

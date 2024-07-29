@@ -25,3 +25,7 @@ variable "cert_domain_validation_options" {
     resource_record_type  = string
   }))
 }
+
+variable "rds_address" {
+  type = string
+}
