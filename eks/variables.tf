@@ -1,3 +1,11 @@
+variable "region" {
+
+}
+
+variable "target_vpc" {
+  type = string
+}
+
 variable "aws_profile" {
   type = string
 }
@@ -15,7 +23,7 @@ variable "cluster_subnet_ids" {
 }
 
 variable "cluster_private_subnet_ids" {
-
+  type = any
 }
 
 variable "cluster_enable_public_access" {
@@ -27,16 +35,12 @@ variable "cluster_public_access_cidrs" {
   type = list(string)
 }
 
-variable "target_vpc" {
-
-}
-
 variable "additional_ingress" {
   type = list(object({
-    from_port   = number
-    to_port     = number
-    protocol    = string
-    cidr_blocks = list(string)
+    from_port       = number
+    to_port         = number
+    protocol        = string
+    security_groups = list(string)
   }))
   default = []
 }
@@ -81,3 +85,12 @@ variable "vpc_cni_version" {
 variable "ebs_csi_driver_version" {
   type = string
 }
+
+variable "namespace" {
+  description = "Kubernetes namespace for the application"
+  default     = "spring-boot"
+}
+
+# variable "acm_elb_arn" {
+
+# }
