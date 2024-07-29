@@ -47,4 +47,3 @@ output "db_private_subnets" {
   description = "List of DB private subnet ID in VPC"
   value       = aws_subnet.private_db.*.id
 }
-

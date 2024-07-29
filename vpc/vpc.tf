@@ -5,7 +5,8 @@ resource "aws_vpc" "default" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "vpc-${var.vpc_name}"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    Name                                        = "vpc-${var.vpc_name}"
   }
 }
 
