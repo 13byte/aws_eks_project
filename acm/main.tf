@@ -21,9 +21,3 @@ resource "aws_acm_certificate" "cloudfront" {
 #     create_before_destroy = true
 #   }
 # }
-
-# resource "aws_acm_certificate_validation" "elb" {
-#   certificate_arn         = aws_acm_certificate.elb.arn
-#   validation_record_fqdns = [aws_route53_record.cert_validation.fqdn]
-# }
-

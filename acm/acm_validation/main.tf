@@ -4,3 +4,8 @@ resource "aws_acm_certificate_validation" "cloudfront" {
 
   provider = aws.virginia
 }
+
+# resource "aws_acm_certificate_validation" "elb" {
+#   certificate_arn         = var.elb_certificate_arn
+#   validation_record_fqdns = var.validation_record_fqdns
+# }
