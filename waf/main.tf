@@ -1,6 +1,6 @@
 resource "aws_wafv2_web_acl" "cloudfront" {
-  name        = "cloudfront-web-acl-${var.vpc_name}"
-  description = "cloudfront web acl for ${var.vpc_name}"
+  name        = "cloudfront-acl-${var.vpc_name}"
+  description = "cloudfront acl for ${var.vpc_name}"
   scope       = "CLOUDFRONT"
 
   default_action {
@@ -9,7 +9,7 @@ resource "aws_wafv2_web_acl" "cloudfront" {
 
   visibility_config {
     cloudwatch_metrics_enabled = true
-    metric_name                = "cloudfront-web-acl-${var.vpc_name}"
+    metric_name                = "cloudfront-acl-${var.vpc_name}"
     sampled_requests_enabled   = true
   }
 
