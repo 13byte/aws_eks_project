@@ -190,3 +190,25 @@ data "aws_iam_policy_document" "public_get_policy" {
     resources = ["${aws_s3_bucket.origin_s3.arn}/*"]
   }
 }
+
+# s3 upload static web files
+resource "null_resource" "upload_web_files" {
+  provisioner "local-exec" {
+    command = "aws s3 sync ./build/ s3://${aws_s3_bucket.origin_s3.bucket}"
+  }
+
+  depends_on = [aws_s3_bucket.origin_s3]
+}
+
+resource "null_resource" "delete_web_files" {
+  triggers = {
+    bucket_name = aws_s3_bucket.origin_s3.bucket
+  }
+
+  provisioner "local-exec" {
+    when    = destroy
+    command = "aws s3 rm s3://${self.triggers.bucket_name} --recursive"
+  }
+
+  depends_on = [aws_s3_bucket.origin_s3]
+}
