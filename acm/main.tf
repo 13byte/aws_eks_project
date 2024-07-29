@@ -10,14 +10,3 @@ resource "aws_acm_certificate" "cloudfront" {
 
   provider = aws.virginia
 }
-
-# resource "aws_acm_certificate" "elb" {
-#   domain_name       = var.domain_name
-#   validation_method = "DNS"
-
-#   subject_alternative_names = ["*.${var.domain_name}"]
-
-#   lifecycle {
-#     create_before_destroy = true
-#   }
-# }
