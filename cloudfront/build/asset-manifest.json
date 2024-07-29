@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.5e8f4481.css",
+    "main.js": "/static/js/main.e87c8053.js",
+    "static/js/787.f00d258e.chunk.js": "/static/js/787.f00d258e.chunk.js",
+    "static/media/ico_megaphone.png": "/static/media/ico_megaphone.adb43a0c7becd403c512.png",
+    "static/media/bg_black.png": "/static/media/bg_black.af567f4c28afde303e62.png",
+    "static/media/bg_blue.png": "/static/media/bg_blue.568bdc3f19f31d5803e2.png",
+    "static/media/bg_green.png": "/static/media/bg_green.6068114cb28bbee3b347.png",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/index.html",
+    "main.5e8f4481.css.map": "/static/css/main.5e8f4481.css.map",
+    "main.e87c8053.js.map": "/static/js/main.e87c8053.js.map",
+    "787.f00d258e.chunk.js.map": "/static/js/787.f00d258e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5e8f4481.css",
+    "static/js/main.e87c8053.js"
+  ]
+}

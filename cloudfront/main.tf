@@ -5,17 +5,22 @@ resource "aws_cloudfront_distribution" "distribution" {
     origin_id                = aws_s3_bucket.origin_s3.id
   }
 
-  # origin {
-  #   domain_name = aws_lb.origin_lb.dns_name
-  #   origin_id   = aws_lb.origin_lb.id
+  origin {
+    domain_name = var.origin_lb_dns_name
+    origin_id   = var.origin_lb_id
 
-  #   custom_origin_config {
-  #     http_port              = 80
-  #     https_port             = 443
-  #     origin_protocol_policy = "https-only"
-  #     origin_ssl_protocols   = ["TLSv1.2"]
-  #   }
-  # }
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "match-viewer"
+      origin_ssl_protocols   = ["TLSv1.2"]
+    }
+
+    custom_header {
+      name  = "X-Custom-Header"
+      value = "}Y$ILp#~sY{qAA1"
+    }
+  }
 
   enabled             = true
   is_ipv6_enabled     = true
@@ -35,18 +40,18 @@ resource "aws_cloudfront_distribution" "distribution" {
     viewer_protocol_policy = "redirect-to-https"
   }
 
-  # ordered_cache_behavior {
-  #   path_pattern     = "/api/*"
-  #   target_origin_id = aws_lb.origin_lb.id
-  #   allowed_methods  = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
-  #   cached_methods   = ["GET", "HEAD"]
-  #   compress         = true
+  ordered_cache_behavior {
+    path_pattern     = "/api/*"
+    target_origin_id = var.origin_lb_id
+    allowed_methods  = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
+    cached_methods   = ["GET", "HEAD"]
+    compress         = true
 
-  #   cache_policy_id          = aws_cloudfront_cache_policy.alb_cache_policy.id
-  #   origin_request_policy_id = aws_cloudfront_origin_request_policy.alb_origin_request_policy.id
+    cache_policy_id          = aws_cloudfront_cache_policy.alb_cache_policy.id
+    origin_request_policy_id = aws_cloudfront_origin_request_policy.alb_origin_request_policy.id
 
-  #   viewer_protocol_policy = "allow-all"
-  # }
+    viewer_protocol_policy = "allow-all"
+  }
 
   restrictions {
     geo_restriction {
@@ -101,47 +106,47 @@ resource "aws_cloudfront_cache_policy" "s3_cache_policy" {
 }
 
 
-# # for ALB policy
-# resource "aws_cloudfront_cache_policy" "alb_cache_policy" {
-#   name = "alb-cache-policy"
+# for ALB policy
+resource "aws_cloudfront_cache_policy" "alb_cache_policy" {
+  name = "alb-cache-policy"
 
-#   parameters_in_cache_key_and_forwarded_to_origin {
-#     cookies_config {
-#       cookie_behavior = "none"
-#     }
+  parameters_in_cache_key_and_forwarded_to_origin {
+    cookies_config {
+      cookie_behavior = "none"
+    }
 
-#     headers_config {
-#       header_behavior = "none"
-#     }
+    headers_config {
+      header_behavior = "none"
+    }
 
-#     query_strings_config {
-#       query_string_behavior = "none"
-#     }
+    query_strings_config {
+      query_string_behavior = "none"
+    }
 
-#     enable_accept_encoding_gzip   = false
-#     enable_accept_encoding_brotli = false
-#   }
+    enable_accept_encoding_gzip   = false
+    enable_accept_encoding_brotli = false
+  }
 
-#   default_ttl = 0
-#   max_ttl     = 0
-#   min_ttl     = 0
-# }
+  default_ttl = 0
+  max_ttl     = 0
+  min_ttl     = 0
+}
 
-# resource "aws_cloudfront_origin_request_policy" "alb_origin_request_policy" {
-#   name = "alb-origin-request-policy"
+resource "aws_cloudfront_origin_request_policy" "alb_origin_request_policy" {
+  name = "alb-origin-request-policy"
 
-#   cookies_config {
-#     cookie_behavior = "all"
-#   }
+  cookies_config {
+    cookie_behavior = "all"
+  }
 
-#   headers_config {
-#     header_behavior = "allViewer"
-#   }
+  headers_config {
+    header_behavior = "allViewer"
+  }
 
-#   query_strings_config {
-#     query_string_behavior = "all"
-#   }
-# }
+  query_strings_config {
+    query_string_behavior = "all"
+  }
+}
 
 resource "aws_s3_bucket" "origin_s3" {
   bucket = var.domain_name
