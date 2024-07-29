@@ -63,8 +63,7 @@ module "acm_validation" {
   source = "./acm/acm_validation"
 
   cloudfront_certificate_arn = module.acm.cloudfront_arn
-  # elb_certificate_arn        = module.acm.elb_arn
-  validation_record_fqdns = [module.route53.cert_validation_fqdn]
+  validation_record_fqdns    = [module.route53.cert_validation_fqdn]
 }
 
 module "cloudfront" {

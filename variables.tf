@@ -153,9 +153,3 @@ variable "root_password" {
 variable "init_db_name" {
   type = string
 }
-
-# # ECR
-
-# variable "ecr_repository_name" {
-#   type = string
-# }
