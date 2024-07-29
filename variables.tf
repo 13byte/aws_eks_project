@@ -3,6 +3,10 @@ variable "aws_region" {
   default     = "ap-northeast-2"
 }
 
+variable "domain_name" {
+  description = "사용할 도메인 이름"
+}
+
 # VPC
 
 variable "vpc_name" {
@@ -77,10 +81,10 @@ variable "additional_ingress" {
   description = "ingress security group"
 
   type = list(object({
-    from_port   = number
-    to_port     = number
-    protocol    = string
-    cidr_blocks = list(string)
+    from_port       = number
+    to_port         = number
+    protocol        = string
+    security_groups = list(string)
   }))
   default = []
 }
@@ -135,3 +139,23 @@ variable "vpc_cni_version" {
 variable "ebs_csi_driver_version" {
   type = string
 }
+
+# RDS
+
+variable "root_username" {
+  type = string
+}
+
+variable "root_password" {
+  type = string
+}
+
+variable "init_db_name" {
+  type = string
+}
+
+# # ECR
+
+# variable "ecr_repository_name" {
+#   type = string
+# }
